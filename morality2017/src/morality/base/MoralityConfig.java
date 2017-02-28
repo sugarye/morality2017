@@ -9,6 +9,9 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.template.Engine;
 
+import morality.business.login.controller.LoginController;
+import morality.util.interceptor.FrontInterceptor;
+
 /**
  * @ClassName: MoralityConfig
  * @Description:基础配置文件类
@@ -20,19 +23,18 @@ public class MoralityConfig extends JFinalConfig {
 
 	@Override
 	public void configConstant(Constants me) {
+		//设置当前环境为开发环境
 		me.setDevMode(true);
-
 	}
 
 	@Override
 	public void configRoute(Routes me) {
-		me.add("/manage",ManageController.class);
-
+         me.add(new FrontRoutes()); //前端路由
+         me.add(new AdminRoutes()); //后端路由
 	}
 
 	@Override
 	public void configEngine(Engine me) {
-		// TODO Auto-generated method stub
 
 	}
 
